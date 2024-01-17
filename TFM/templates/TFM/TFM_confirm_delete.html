@@ -1,0 +1,22 @@
+{% extends 'TFM/base.html' %}
+{% load crispy_forms_tags %}
+
+<!-- Código para el cuerpo de la página HOME -->
+    {%block content%}
+        <h1>Registro de usuario</h1>
+        <div class="container">
+            <form method="POST">
+                {% csrf_token %}
+                <fieldset class="form-group">
+                    <legend class="border-bottom mb-4">Seguro que deseas borrar la receta {{object}}</legend>
+                    {{form|crispy}}
+                </fieldset>
+                <div class="form-group py-3">
+                    <input class="btn btn-outline-danger" type="submit" value="Borrar">
+                </div>
+            </form>
+            <div class="border-top pt-3">
+                <a href={% url 'TFM-home' %}> Cancelar </a>
+            </div>
+        </div>
+    {%endblock content%}

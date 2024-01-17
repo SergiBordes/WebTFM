@@ -1,0 +1,19 @@
+{%extends 'TFM/base.html'%}
+<!-- Código para el cuerpo de la página HOME -->
+    {%block content%}
+        <h1>TFM Detalle #{{object.id}}</h1>
+            <div class="card my-4" style="width: 18rem;">
+                <div class="card-body">
+                  <h3 class="card-title">{{object.titulo}}</h3>
+                  <h6 class="card-subtitle mb-2 text-body-secondary">{{object.author}}  | {{object.fecha_creacion|date:"F d, Y"}}</h6>
+                  <p class="card-text">{{object.descripcion}}</p>
+                  <p class="card-text">{{object.fecha_modificacion|date:"F d, Y"}}</p>
+                </div>
+              </div>
+              {% if object.author == user or user.is_staff %}
+                <div class="col-4">
+                    <a class="btn btn-outline-info" href="{% url 'TFM-update' object.id %}">Actualizar</a>
+                    <a class="btn btn-outline-danger" href="{% url 'TFM-delete' object.id %}">Eliminar</a>
+                </div>
+              {% endif %}
+    {%endblock content%}

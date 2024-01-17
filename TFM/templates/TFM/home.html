@@ -1,0 +1,16 @@
+{%extends 'TFM/base.html'%}
+<!-- Código para el cuerpo de la página HOME -->
+    {%block content%}
+        <h1>TFM App Home</h1>
+        {% for receta in recetas %}
+            <div class="card mt-4" style="width: 18rem;">
+                <div class="card-body">
+                  <h3 class="card-title">{{receta.titulo}}</h3>
+                  <h6 class="card-subtitle mb-2 text-body-secondary">{{receta.author}}  | {{receta.fecha_creacion|date:"F d, Y"}}</h6>
+                  <p class="card-text">{{receta.descripcion}}</p>
+                  <p class="card-text">{{receta.fecha_modificacion|date:"F d, Y"}}</p>
+                  <a href={% url 'TFM-detail' receta.pk%} class="card-link"> Ver Receta </a>
+                </div>
+              </div>
+        {% endfor %}
+    {%endblock content%}

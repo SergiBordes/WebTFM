@@ -1,0 +1,7 @@
+Mi superusuario:
+    username: xexi
+    pass: xexiadmin
+
+Usuario de prueba
+    username: pruebauser
+    pass: contrapass
