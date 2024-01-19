@@ -5,30 +5,42 @@ from django.urls import reverse_lazy
 from .models import DatosAgrarios
 from .forms import DatosAgrariosFilterForm
 from django.core.paginator import Paginator
-
+from .datoscsv.datamain import obtenerVariedades
 
 # Create your views here.
 # en tu_app/views.py
 
 
 def mostrarDatos(request):
+    semanas = list(range(1, 43))
+    productos = obtenerVariedades
     form = DatosAgrariosFilterForm(request.GET)
-    queryset = DatosAgrarios.objects.all()  # Obtén las primeras 10 filas
+    queryset = DatosAgrarios.objects.all()
     anyo_filtro = request.GET.get('anyo')
     semana_filtro = request.GET.get('semana')
+    producto_filtro = request.GET.get('producto')
     # variedad_filtro = request.GET.get('anyo')
 
     if form.is_valid():
+        #Filtramos anyo
         if anyo_filtro != "0" and anyo_filtro is not None:
+            print("se filtra por año")
             queryset = queryset.filter(anyo_precio=anyo_filtro)
-        # Agrega lógica similar para otros campos del formulario según sea necesario
+            
+        # Filtramos semana
         if semana_filtro != "0" and semana_filtro is not None:
+            print("se filtra por semana")
             queryset = queryset.filter(semana_precio=semana_filtro)
-        # if variedad_filtro != "0" and variedad_filtro is not None:
-        #     queryset = queryset.filter(anyo_precio=variedad_filtro)
+        
+        #Filtramos variedad 
+        if producto_filtro != "0" and producto_filtro is not None:
+            print("se filtra por producto")
+            queryset = queryset.filter(producto_castellano=producto_filtro)
 
     paginator = Paginator(queryset, 10)
     page_number = request.GET.get('page')
     queryset = paginator.get_page(page_number)
     
-    return render(request, 'datosagrarios/datos.html', {'form': form, 'data': queryset})
+    return render(request, 'datosagrarios/datos.html', {'form': form, 'data': queryset, 'semanas': semanas, 'productos': productos})
+
+
