@@ -12,7 +12,7 @@ from .datoscsv.datamain import obtenerVariedades
 
 
 def mostrarDatos(request):
-    semanas = list(range(1, 43))
+    semanas = list(range(1, 48))
     productos = obtenerVariedades
     form = DatosAgrariosFilterForm(request.GET)
     queryset = DatosAgrarios.objects.all()
@@ -37,10 +37,15 @@ def mostrarDatos(request):
             print("se filtra por producto")
             queryset = queryset.filter(producto_castellano=producto_filtro)
 
+    total_filas = queryset.count()
+    
     paginator = Paginator(queryset, 10)
     page_number = request.GET.get('page')
     queryset = paginator.get_page(page_number)
     
-    return render(request, 'datosagrarios/datos.html', {'form': form, 'data': queryset, 'semanas': semanas, 'productos': productos})
+    # Agrega los parámetros de filtro a la URL de paginación
+    queryset.paginator.baseurl = f"?page={page_number}" + f"&anyo={request.GET.get('anyo')}" + f"&semana={request.GET.get('semana')}" + f"&producto={request.GET.get('producto')}"
+    
+    return render(request, 'datosagrarios/datos.html', {'form': form, 'data': queryset, 'semanas': semanas, 'productos': productos, 'total_filas': total_filas})
 
 
