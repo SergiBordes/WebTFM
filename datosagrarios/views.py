@@ -5,15 +5,24 @@ from django.urls import reverse_lazy
 from .models import DatosAgrarios
 from .forms import DatosAgrariosFilterForm
 from django.core.paginator import Paginator
-from .datoscsv.datamain import obtenerVariedades
+from .datoscsv.datamain import obtenerProductos, obtenerVariedades, media_precio_por_anyo
+
+from django.shortcuts import render
+import matplotlib.pyplot as plt
+from django.http import HttpResponse
+from django.views.decorators.csrf import csrf_exempt
+import io
+import base64
 
 # Create your views here.
 # en tu_app/views.py
+plt.switch_backend('Agg')
 
-
+@csrf_exempt
 def mostrarDatos(request):
     semanas = list(range(1, 48))
-    productos = obtenerVariedades
+    productos = obtenerProductos()
+    variedades = obtenerVariedades()
     form = DatosAgrariosFilterForm(request.GET)
     queryset = DatosAgrarios.objects.all()
     anyo_filtro = request.GET.get('anyo')
@@ -39,13 +48,33 @@ def mostrarDatos(request):
 
     total_filas = queryset.count()
     
-    paginator = Paginator(queryset, 10)
+    paginator = Paginator(queryset, 20)
     page_number = request.GET.get('page')
     queryset = paginator.get_page(page_number)
     
     # Agrega los parámetros de filtro a la URL de paginación
-    queryset.paginator.baseurl = f"?page={page_number}" + f"&anyo={request.GET.get('anyo')}" + f"&semana={request.GET.get('semana')}" + f"&producto={request.GET.get('producto')}"
+    queryset.paginator.baseurl = f"?page={page_number}" + f"&anyo={request.GET.get('anyo')}" + f"&semana={request.GET.get('semana')}" + f"&producto={request.GET.get('producto')}"# Datos de ejemplo (puedes reemplazarlos con tus propios datos)
+
+    datagrafica = []
     
-    return render(request, 'datosagrarios/datos.html', {'form': form, 'data': queryset, 'semanas': semanas, 'productos': productos, 'total_filas': total_filas})
+    if request.method == 'POST':
+        # Verificar si el botón del Formulario 2 se ha presionado
+        if 'btnGrafica' in request.POST:
+            # Realizar acciones específicas para el Formulario 2
+            variedadGrafica = request.POST['variedadGrafica']
+            print('Valor del campo del Formulario 2:', variedadGrafica)
+            datagrafica = media_precio_por_anyo(variedadGrafica)
+
+    # Agrega 'variedades' al contexto
+    context = {
+        'form': form,
+        'data': queryset,
+        'semanas': semanas,
+        'productos': productos,
+        'total_filas': total_filas,
+        'stepcount': datagrafica,
+        'variedades': variedades,
+    }
+    return render(request, 'datosagrarios/datos.html', context)
 
 
