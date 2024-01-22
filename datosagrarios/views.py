@@ -57,6 +57,8 @@ def mostrarDatos(request):
 
     datagrafica = []
     
+    deslizar = "topPagina"
+    
     if request.method == 'POST':
         # Verificar si el botón del Formulario 2 se ha presionado
         if 'btnGrafica' in request.POST:
@@ -64,6 +66,7 @@ def mostrarDatos(request):
             variedadGrafica = request.POST['variedadGrafica']
             print('Valor del campo del Formulario 2:', variedadGrafica)
             datagrafica = media_precio_por_anyo(variedadGrafica)
+            deslizar = "chartContainer"
 
     # Agrega 'variedades' al contexto
     context = {
@@ -74,6 +77,7 @@ def mostrarDatos(request):
         'total_filas': total_filas,
         'stepcount': datagrafica,
         'variedades': variedades,
+        'deslizar': deslizar,
     }
     return render(request, 'datosagrarios/datos.html', context)
 
