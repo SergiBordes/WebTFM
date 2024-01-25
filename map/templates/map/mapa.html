@@ -2,7 +2,7 @@
 
 {% block content %}
 
-    <div class="container-fluid">
+    <div class="fluid">
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
@@ -21,8 +21,14 @@
             <h5>Filtrar en el mapa</h5>
         </div>
         <div class="card-body">
-            Aqui pondremos los filtros para el mapa
+        <!-- Aquí agregamos el dropdown para filtrar -->
+        <select class="form-control" id="filtro">
+            <option value="todos">Todos</option>
+            <option value="Valencia">Valencia</option>
+            <option value="Alicante">Alicante</option>
+            <option value="Castellon">Castellón</option>
+        </select>
         </div>
     </div>
-
+    
 {% endblock content %}
