@@ -37,6 +37,8 @@
     <!--Morris-->
     <link rel="stylesheet" href="{% static "plugins/chart-morris/css/morris.css" %}">
     
+    {% block index_styles %} {% endblock %}
+    
 
 </head>
 <body>
@@ -102,7 +104,7 @@
   </nav>
   <!-- [ navigation menu ] end -->
 
-    <div class="container mt-4 col-8 pb-4">
+    <div class="container mt-4 pb-4">
       {% if messages %}
         {% for message in messages %}
           <div class="alert alert-{{message.tags}}" role="alert">{{ message }}</div>
@@ -123,5 +125,14 @@
     <script src="{% static "js/pages/chart-morris-custom.js" %}"></script>
     <script src="{% static "js/canvasjs.min.js" %}"></script>
     <script src="{% static "json/provincias.json" %}"></script>
+    
+    <!-- plantilla landing -->
+    <script src="{% static "plugins/chart-morris/js/raphael.min.js" %}"></script>
+    <script src="{% static "plugins/chart-morris/js/morris.min.js" %}"></script>
+    <script src="{% static "js/pages/chart-morris-custom.js" %}"></script>
+    <script src="{% static "js/canvasjs.min.js" %}"></script>
+    <script src="{% static "json/provincias.json" %}"></script>
+
+    {% block scripts_index %} {% endblock %}
 </body>
 </html>

@@ -2,20 +2,6 @@
 
 {% block content %}
 
-    <div class="fluid">
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-header">
-                    <h5>MAPA INTERACTIVO</h5>
-                </div>
-                <div class="card-body">
-                    {{ map|safe }}
-                </div>
-                
-            </div>
-        </div>
-    </div>
-
     <div class="card">
         <div class="card-header">
             <h5>Filtrar en el mapa</h5>
@@ -30,5 +16,16 @@
         </select>
         </div>
     </div>
+
+    <div class="card">
+        <div class="card-header">
+            <h5>MAPA INTERACTIVO</h5>
+        </div>
+        <div class="card-body">
+            {{ map|safe }}
+        </div>
+    </div>
+
+    
     
 {% endblock content %}
