@@ -7,13 +7,18 @@
             <h5>Filtrar en el mapa</h5>
         </div>
         <div class="card-body">
-        <!-- Aquí agregamos el dropdown para filtrar -->
-        <select class="form-control" id="filtro">
-            <option value="todos">Todos</option>
-            <option value="Valencia">Valencia</option>
-            <option value="Alicante">Alicante</option>
-            <option value="Castellon">Castellón</option>
-        </select>
+            <!-- Aquí agregamos el dropdown para filtrar -->
+            <form method="get">
+                <div class="row justify-content-around">
+                    <select class="form-control col-8" id="filtro">
+                        <option value="todos">Todos</option>
+                        <option value="Valencia">Valencia</option>
+                        <option value="Alicante">Alicante</option>
+                        <option value="Castellon">Castellón</option>
+                    </select>
+                    <button type="submit"  class="col-2 btn shadow-2 mb-4" style="color: #dbdbdb; background-color: #000e41;">Filtrar</button>
+                </div>
+            </form>
         </div>
     </div>
 
