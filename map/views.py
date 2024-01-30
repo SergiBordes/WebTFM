@@ -4,6 +4,9 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 import folium
 import pandas
 import requests
+from datosagrarios.datoscsv.datamain import obtenerVariedades
+
+
 
 geo_json_data = requests.get(
     "https://raw.githubusercontent.com/codeforgermany/click_that_hood/main/public/data/spain-provinces.geojson"
@@ -12,6 +15,8 @@ geo_json_data = requests.get(
 
 # Create your views here.
 def map(request):
+    
+    variedades = obtenerVariedades()
     
     mapa = folium.Map(location=[39.4630349,-0.3774392], tiles="cartodbpositron", zoom_start = 11, min_zoom=9)
 
@@ -27,7 +32,7 @@ def map(request):
         },
     ).add_to(m)
     
-    context = {'map': m._repr_html_()}
+    context = {'map': m._repr_html_(), 'variedades': variedades}
     return render(request, 'map/mapa.html', context)
 
 
