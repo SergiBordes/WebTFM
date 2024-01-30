@@ -59,43 +59,40 @@
                   <li class="nav-item pcoded-menu-caption">
                       <label>Home</label>
                   </li>
-                  <li data-username="dashboard Default Ecommerce CRM Analytics Crypto Project" class="nav-item active">
+                  <li data-username="dashboard Default Ecommerce CRM Analytics Crypto Project" class="nav-item">
                       <a href="{% url 'TFM-home' %}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-home"></i></span><span class="pcoded-mtext">Página Principal</span></a>
+                  </li>
+                  <li class="nav-item pcoded-menu-caption">
+                    <label>Mapas & Datos</label>
+                  </li>
+                  <li data-username="Charts Morris" class="nav-item">
+                    <a href="{% url 'map-map' %}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-compass"></i></span><span class="pcoded-mtext">Mapa</span></a>
+                  </li>
+                  <li data-username="Charts Morris" class="nav-item">
+                    <a href="{% url 'datosagrarios-datos' %}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-server"></i></span><span class="pcoded-mtext">Datos</span></a>
                   </li>
                   <li class="nav-item pcoded-menu-caption">
                       <label>Páginas</label>
                   </li>
                   <li data-username="form elements advance componant validation masking wizard picker select" class="nav-item">
-                      <a href= {% url 'TFM-about' %} class="nav-link "><span class="pcoded-micon"><i class="feather icon-file-text"></i></span><span class="pcoded-mtext">About</span></a>
-                  </li>
-                  <li data-username="Table bootstrap datatable footable" class="nav-item">
-                      <a href= {% url 'TFM-crear' %} class="nav-link "><span class="pcoded-micon"><i class="feather icon-server"></i></span><span class="pcoded-mtext">Añadir Receta</span></a>
-                  </li>
-                  <li class="nav-item pcoded-menu-caption">
-                      <label>Mapas & Datos</label>
-                  </li>
-                  <li data-username="Charts Morris" class="nav-item">
-                    <a href="{% url 'map-map' %}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-map"></i></span><span class="pcoded-mtext">Mapa</span></a>
-                  </li>
-                  <li data-username="Charts Morris" class="nav-item">
-                    <a href="{% url 'datosagrarios-datos' %}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-map"></i></span><span class="pcoded-mtext">Datos</span></a>
+                      <a href= "{% url 'TFM-about' %}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-file-text"></i></span><span class="pcoded-mtext">About</span></a>
                   </li>
                   <li class="nav-item pcoded-menu-caption">
                     <label>Usuario</label>
                   </li>
                   {% if user.is_authenticated %}
                     <li data-username="Maps Google" class="nav-item">
-                      <a href="{% url 'users-profile' %}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-map"></i></span><span class="pcoded-mtext">Mi perfil</span></a>
+                      <a href="{% url 'users-profile' %}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-user"></i></span><span class="pcoded-mtext">Mi perfil</span></a>
                     </li>
                     <li data-username="Maps Google" class="nav-item">
-                      <a href="{% url 'users-logout' %}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-map"></i></span><span class="pcoded-mtext">Cerrar Sesión</span></a>
+                      <a href="{% url 'users-logout' %}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-user-x"></i></span><span class="pcoded-mtext">Cerrar Sesión</span></a>
                     </li>
                   {% else %}
                     <li data-username="Maps Google" class="nav-item">
-                      <a href="{% url 'users-login' %}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-map"></i></span><span class="pcoded-mtext">Iniciar Sesión</span></a>
+                      <a href="{% url 'users-login' %}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-user-check"></i></span><span class="pcoded-mtext">Iniciar Sesión</span></a>
                     </li>
                     <li data-username="Maps Google" class="nav-item">
-                      <a href="{% url 'users-register' %}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-map"></i></span><span class="pcoded-mtext">Registrarse</span></a>
+                      <a href="{% url 'users-register' %}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-user-plus"></i></span><span class="pcoded-mtext">Registrarse</span></a>
                     </li>
                   {% endif %}
               </ul>
