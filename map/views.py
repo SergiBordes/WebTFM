@@ -4,7 +4,10 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 import folium
 import pandas
 import requests
-from datosagrarios.datoscsv.datamain import obtenerVariedades
+import json
+from datosagrarios.forms import DatosAgrariosFilterForm
+from datosagrarios.models import DatosAgrarios
+from datosagrarios.datoscsv.datamain import obtenerVariedades, precio_medio_variedad_por_provincia
 
 
 
@@ -15,7 +18,9 @@ geo_json_data = requests.get(
 
 # Create your views here.
 def map(request):
-    
+    form = DatosAgrariosFilterForm(request.GET)
+    queryset = DatosAgrarios.objects.all()
+
     variedades = obtenerVariedades()
     
     mapa = folium.Map(location=[39.4630349,-0.3774392], tiles="cartodbpositron", zoom_start = 11, min_zoom=9)
@@ -31,6 +36,13 @@ def map(request):
             "dashArray": "5, 5",
         },
     ).add_to(m)
+    
+    if request.method == 'GET':
+        anyo_filtro = request.GET.get('anyo')
+        variedad_filtro = request.GET.get('variedad')
+        print("==================== pruebas--> Año: " + str(anyo_filtro) + " ;   Variedad: " + str(variedad_filtro))
+        precios_medios  = precio_medio_variedad_por_provincia(str(variedad_filtro), str(anyo_filtro))
+        print("################## -->" + json.dumps(precios_medios))
     
     context = {'map': m._repr_html_(), 'variedades': variedades}
     return render(request, 'map/mapa.html', context)

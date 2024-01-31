@@ -8,15 +8,15 @@
         </div>
         <div class="card-body">
             <!-- Aquí agregamos el dropdown para filtrar -->
-            <form method="get">
+            <form method="get" action="{% url 'map-map' %}">
                 <div class="row justify-content-around">
-                    <select class="form-control col-5" id="variedad">
+                    <select class="form-control col-5" id="variedad" name="variedad">
                         <option value="0"></option>
                         {% for variedad in variedades %}
                             <option value="{{variedad}}">{{variedad}}</option>
                         {% endfor %}
                     </select>
-                    <select class="form-control col-4" id="anyo">
+                    <select class="form-control col-4" id="anyo" name="anyo">
                         <option value="2017">2017</option><option value="2018">2018</option><option value="2019">2019</option><option value="2020">2020</option><option value="2021">2021</option><option value="2022">2022</option><option value="2023">2023</option><option value="2024">2024</option>
                     </select>
                     <button type="submit"  class="col-2 btn shadow-2 mb-4" style="color: #dbdbdb; background-color: #000e41;">Filtrar</button>
