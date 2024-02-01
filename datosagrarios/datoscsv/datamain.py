@@ -40,18 +40,23 @@ def media_precio_por_anyo(variedad):
 # Media de precio por provincia y año
 def precio_medio_variedad_por_provincia(variedad, anyo):
     df = pd.read_csv('datosagrarios/datoscsv/precios_agrarios_comunitat_valenciana.csv', delimiter=';')
-    # Filtrar por año y variedad
-    # Limpiar los valores de 'Precio Medio'
-    df['Precio Medio'] = df['Precio Medio'].str.replace(',', '.')
-
-    # Filtrar por año y variedad
-    df_filtrado = df[(df['Anyo Precio'] == anyo) & (df['Variedad castellano'] == variedad)]
-
-    # Calcular precio medio por provincia
-    precios_medios = df_filtrado.groupby('Zona castellano')['Precio Medio'].mean().to_dict()
+    # Filtrar por variedad y año
+    df_filtrado = df[(df['Variedad castellano'] == variedad) & (df['Anyo Precio'] == anyo)]
     
-    # Ordenar el diccionario por los valores (precios medios) en orden descendente
-    precios_medios_ordenados = dict(sorted(precios_medios.items(), key=lambda item: item[1], reverse=True))
-
-    return precios_medios_ordenados
+    # Limpiar y convertir los valores de 'Precio Medio' a numéricos
+    df_filtrado['Precio Medio'] = df_filtrado['Precio Medio'].str.replace(',', '.').astype(float)
+    
+    # Calcular el precio medio por provincia
+    precios_medios = df_filtrado.groupby(['Zona castellano', 'Zona valenciano'])['Precio Medio'].mean().reset_index()
+    
+    # Ordenar los resultados de mayor a menor precio medio
+    precios_medios = precios_medios.sort_values(by='Precio Medio', ascending=False)
+    
+    # Crear una lista de diccionarios en el formato deseado
+    resultado_formato = [
+        {"provincia": f"{row['Zona valenciano']}/{row['Zona castellano']}", "precio_medio": round(row['Precio Medio'], 2)}
+        for index, row in precios_medios.iterrows()
+    ]
+    
+    return resultado_formato
 
