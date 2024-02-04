@@ -102,11 +102,6 @@
   <!-- [ navigation menu ] end -->
 
     <div class="container mt-4 pb-4">
-      {% if messages %}
-        {% for message in messages %}
-          <div class="alert alert-{{message.tags}}" role="alert">{{ message }}</div>
-        {% endfor %}
-      {% endif %}
       {% block content %} {% endblock content %}
     </div>
 

@@ -12,7 +12,7 @@
 body {
   font-family: "Open Sans", sans-serif;
   color: #444444;
-  background-color: #f4f7fa;
+  background-color: #f4f7fa !important;
 }
 
 a {
@@ -399,11 +399,11 @@ h6 {
   position: relative;
   background-size: cover;
   position: relative;
+  background-color: #f4f7fa;
 }
 
 #hero:before {
   content: "";
-  background: rgba(255, 255, 255, 0.8);
   position: absolute;
   bottom: 0;
   top: 0;
@@ -560,6 +560,15 @@ section {
 .about .content h3 {
   font-weight: 600;
   font-size: 26px;
+}
+
+#about h1 {
+  margin: 0;
+  font-size: 56px;
+  font-weight: 700;
+  line-height: 72px;
+  color: #124265;
+  font-family: "Poppins", sans-serif;
 }
 
 .about .content ul {
@@ -1477,7 +1486,7 @@ section {
 --------------------------------------------------------------*/
 .contact .info {
   width: 100%;
-  background: #fff;
+  background: #f4f7fa;
 }
 
 .contact .info i {
