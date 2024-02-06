@@ -625,6 +625,7 @@ section {
 --------------------------------------------------------------*/
 .counts {
   padding: 60px 0;
+  /* background-color: white; */
 }
 
 .counts .count-box {
