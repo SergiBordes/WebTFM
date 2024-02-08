@@ -5,6 +5,7 @@ import folium
 import pandas
 import requests
 import json
+from django.contrib.auth.decorators import login_required
 from datosagrarios.forms import DatosAgrariosFilterForm
 from datosagrarios.models import DatosAgrarios
 from datosagrarios.datoscsv.datamain import obtenerVariedades, precio_medio_variedad_por_provincia
@@ -19,6 +20,7 @@ precios_medios = []
 
 
 # Create your views here.
+@login_required()
 def map(request):
     form = DatosAgrariosFilterForm(request.GET)
     queryset = DatosAgrarios.objects.all()

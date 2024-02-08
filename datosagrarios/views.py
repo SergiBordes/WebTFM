@@ -11,6 +11,7 @@ from django.shortcuts import render
 import matplotlib.pyplot as plt
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth.decorators import login_required
 import io
 import base64
 
@@ -19,6 +20,7 @@ import base64
 plt.switch_backend('Agg')
 
 @csrf_exempt
+@login_required
 def mostrarDatos(request):
     semanas = list(range(1, 48))
     productos = obtenerProductos()

@@ -4,6 +4,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login
 from django.views.decorators.csrf import csrf_protect
+from django.contrib.auth import logout
 from django.urls import reverse
 from django.contrib.auth.models import User
 
@@ -55,3 +56,7 @@ def login_view(request):
 @login_required() # No te deja entrar en la página si no estás logeado (y te redirige a LOGIN_URL)
 def profile(request):
     return render(request, 'users/profile.html')
+
+def logout_view(request):
+    logout(request)
+    return redirect(reverse('users-login'))
