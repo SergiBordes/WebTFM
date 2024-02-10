@@ -55,6 +55,15 @@ def login_view(request):
 
 @login_required() # No te deja entrar en la página si no estás logeado (y te redirige a LOGIN_URL)
 def profile(request):
+    if request.method == "POST":
+        user = request.user
+        web = request.POST.get('web')
+        if web != "":
+            user.web = web
+            user.save()
+            print("Si que es diferente", user.web)
+        
+            
     return render(request, 'users/profile.html')
 
 def logout_view(request):
