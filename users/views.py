@@ -58,10 +58,20 @@ def profile(request):
     if request.method == "POST":
         user = request.user
         web = request.POST.get('web')
+        github = request.POST.get('github')
+        twitter = request.POST.get('twitter')
         if web != "":
             user.web = web
             user.save()
             print("Si que es diferente", user.web)
+        if github != "":
+            user.github = github
+            user.save()
+            print("Si que es diferente", user.github)
+        if twitter != "":
+            user.twitter = twitter
+            user.save()
+            print("Si que es diferente", user.twitter)
         
             
     return render(request, 'users/profile.html')
