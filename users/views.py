@@ -73,8 +73,10 @@ def profile(request):
             user.save()
             print("Si que es diferente", user.twitter)
         
-            
-    return render(request, 'users/profile.html')
+    datos_url = reverse('datosagrarios-datos') + '?producto=Cebolla Tierna'
+    mapa_url = reverse('map-map') + '?variedad=Clementina+Arrufatina&anyo=2023'
+    
+    return render(request, 'users/profile.html', {'datos_url': datos_url, 'mapa_url': mapa_url})
 
 def logout_view(request):
     logout(request)

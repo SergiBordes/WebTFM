@@ -5,3 +5,8 @@ Mi superusuario:
 Usuario de prueba
     username: pruebauser
     pass: contrapass
+
+
+** Comprobar si se ha añadido algo al models del User, si es así, añadirlo y hacer:
+    python manage.py makemigrations
+    python manage.py migrate
