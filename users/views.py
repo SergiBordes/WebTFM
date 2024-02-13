@@ -74,7 +74,7 @@ def profile(request):
             print("Si que es diferente", user.twitter)
         
     datos_url = reverse('datosagrarios-datos') + '?producto=Cebolla Tierna'
-    mapa_url = reverse('map-map') + '?variedad=Clementina+Arrufatina&anyo=2023'
+    mapa_url = reverse('map-map') + '?variedad=Cebolla+Tierna&anyo=2024'
     
     return render(request, 'users/profile.html', {'datos_url': datos_url, 'mapa_url': mapa_url})
 

@@ -22,7 +22,7 @@ plt.switch_backend('Agg')
 @csrf_exempt
 @login_required
 def mostrarDatos(request):
-    semanas = list(range(1, 48))
+    semanas = [str(numero) for numero in range(1, 48)]
     productos = obtenerProductos()
     variedades = obtenerVariedades()
     form = DatosAgrariosFilterForm(request.GET)
@@ -30,7 +30,6 @@ def mostrarDatos(request):
     anyo_filtro = request.GET.get('anyo')
     semana_filtro = request.GET.get('semana')
     producto_filtro = request.GET.get('producto')
-    # variedad_filtro = request.GET.get('anyo')
 
     if form.is_valid():
         #Filtramos anyo
